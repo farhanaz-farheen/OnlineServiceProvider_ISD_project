@@ -1,0 +1,23 @@
+{% extends 'admins/base.html' %}
+
+{% block content %}
+
+<center>
+	<div class="container form1">
+		<h2 class="text-center">Provider Requests</h2>
+		<form method="post" enctype="multipart/form-data" novalidate>
+			{% csrf_token %}
+			{% for prov in providers %}
+				<p>Name : {{ prov.name }} &nbsp Email : {{ prov.email }}</p>
+				<p>Phone : {{ prov.phone }}</p>
+				<p>Category : {{ prov.category }}</p>
+				<p>Description : {{ prov.desc }}</p>
+				<img src="{{ prov.imgurl }}" class="servImg">
+				<button type="submit" name="btn" class="btn btn-dark btn-space" value="{{ prov.id }}">Details</button>
+			{% endfor %}
+		</form>
+	</div>
+</center>
+
+{% endblock %}
+

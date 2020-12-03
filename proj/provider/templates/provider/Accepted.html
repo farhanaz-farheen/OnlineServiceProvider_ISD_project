@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    {% load static %}
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'provhome/img/core-img/favicon.ico' %}">
+    <!-- Core Stylesheet -->
+	 <link rel="stylesheet" href="{% static 'provhome/style.css' %}">
+
+</head>
+
+<body>
+    <!-- ##### Preloader ##### -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+    <!-- ##### Header area start ##### -->
+ <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p><font size ="3">Welcome to <span>Online Service Provider.</span> You are accessing as a <span><i><b><font size ="3">Provider</font></b></i></span></font></p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a href="/provider/logout"><font size ="3">Logout</font></a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="cryptos-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="cryptosNav">
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="/provider/profile">Home</a></li>
+                                    <li><a href="/provider/edit">Edit Profile</a>
+                                    </li>
+                                    <li><a href="/provider/editcost">Edit Service Details</a>
+                                    </li>
+                                    <li><a href="/provider/inbox">Inbox</a>
+                                    </li>
+                                    <li><a href="/provider/Processing">Accepted Orders</a>
+                                    </li>
+                                    </li>
+                                    <li><a href="/provider/PastOrders">Past Orders</a>
+                                    </li>
+                                    <li><a href="/provider/editDP">Edit Display Picture</a>
+                                    </li>
+                                    
+                                </ul>
+
+
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+
+
+<div class="blog-area section-padding-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <center>
+    <div class="container form1">
+        <div class="blog-section-heading mb-50">
+                            <h3>Accepted Orders - Processing</h3>
+                        </div>
+        <form method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            {% if totalreqs == "0" %}
+                <a class="post-title">None Yet</a>
+            {% endif %}
+            {% for order in orders %}
+                <p><font size = "4">Ordered at <font color="orange">{{ order.time_order }}</font> by <font color="orange">{{ order.name }}</font></font></p>
+                <!--
+                <p>Time of Order : {{ order.time_order }}</p>
+                <p>Customer : {{ order.name }}</p>
+                <p>Cost : {{ order.cost }}</p>
+                -->
+                <button type="submit" name="btn" class="btn btn-dark btn-space" value="{{ order.id }}">Details</button>
+            {% endfor %}
+        </form>
+    </div>
+</center>
+
+                </div>
+
+                                <div class="col-12 col-lg-4">
+                    <div class="cryptos-blog-sidebar-area">
+                        {% if trendlen != 0 %}
+                        <!-- Section Heading -->
+                        <div class="blog-section-heading mb-50">
+                            <h3>Trending Services</h3>
+                        </div>
+                        
+                            <!-- ONE RECOMMNDATION CATEGORY BEGINS HERE -->
+                                <div class="single-blog-area blog-style-3 d-flex align-items-center mb-15">
+                                    <div class="blog-content">
+                                        <div class="meta-data">
+                                            <a style="font-size: 20px;">Service Providers with High Rating</a>
+                                        </div>               
+                                    </div>
+                                </div>
+                            <!-- LIST ALL SERVICES UNDER THIS RECOMMENDATION CATEGORY --> 
+                            {% for o in trend %}
+                                <div class="single-blog-area blog-style-3 d-flex align-items-center mb-15">
+                                    <!-- Thumbnail -->
+                                    <div class="blog-thumbnail">
+                                        <img src="{{ o.url }}" alt="">
+                                    </div>
+                                    <!-- Content -->
+                                    <div class="blog-content">
+                                        <a href="/account/searchDetail/{{ o.id }}" class="post-title">{{ o.provname }}</a>  
+                                        <div class="meta-data">
+                                            <a>{{ o.servname }}</a>
+                                        </div>  
+                                    </div>
+                                     
+                                </div>
+                            {% endfor %}
+                            <!--END OF SERVICE LIST UNDER THIS RECO CATEGORY-->
+                            <!-- END OF THIS CATEGORY -->
+                            
+                        {% endif %}                 
+                        
+                    </div>
+                </div>
+                </div>
+
+            </div>
+        </div>
+
+	<script src="{% static 'provhome/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'provhome/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'provhome/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'provhome/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'provhome/js/active.js' %}"></script>
+
+</body>
+</html>
+
+

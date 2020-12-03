@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'account/style.css' %}">
+
+</head>
+
+<body>
+
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+    
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p style="font-size: 20px;">Welcome to <span>Online Service Provider</span> You are accessing as a <i><b><span>customer</span></i></b></p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a style="font-size: 20px;" href="/account/logout">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="cryptos-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="cryptosNav">
+
+                        <!-- Logo -->
+                        <a class="nav-brand" href="#"><img src="{% static 'account/img/core-img/logo.png' %}" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="/account/profile">{{ user }}</a></li>
+                                    <li><a href="/account/Editcustomer">Edit Account</a></li>
+                                    {% if cart != "None" %}
+                                        <li><a href="#">Cart</a>
+                                            <ul class="dropdown" style="width: 300px;">
+                                                {% for c in cartobjs %}
+                                                    <li><a href="#">{{ c.provname }}</a></li>
+                                                            
+                                                {% endfor %}
+                                                <li><a href="/account/finishcart">&nbsp Finish Cart &nbsp</a>
+                                            
+                                            </ul>
+                                        </li>
+                                    {% endif %}
+
+                                    <li><a href="#">Orders</a>
+                                        <ul class="dropdown" style="width: 200px;">
+                                            <li><a href="/account/pending_order">Pending Orders | <font color="orange">{{ totalPending }}</font></a></li>
+                                            <li><a href="/account/accepted_order">Accepted Orders | <font color="orange">{{ totalAccepted }}</font></a></li>
+                                            <li><a href="/account/PastOrders">Past Orders | <font color="orange">{{ totalPast }}</font></a></li>
+                                        </ul>
+                                    </li>                            
+                                </ul>
+
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <section    class="cryptos-video-area section-padding-100-0 bg-img"
+                style="background-image: url({% static 'account/img/other/light3.jpg' %}); background-style: cover;">
+	<p></p>
+	<div class="bslf">
+		<form method="post" novalidate>
+			{% csrf_token %}
+			<h2 class="text-center">Delete your Account</h2>
+            <br>
+			<center>
+            
+            <label style="font-size: 20px;"> {{ user }}, you can always join Online Service Provider again. We hope you had a good experience. </label>
+            <br>
+            <label style="font-size: 20px;">Please tell us why you are leaving and give us suggestions to improve.</label>
+            <br>
+            <br>
+            <textarea rows="6" cols="50" name="message" maxlength="299"></textarea>
+            <br>
+            <label style="font-size: 16px; color:red;">{{ msg }}</label>
+			<p>&nbsp</p>
+           
+            <label style="font-size: 20px;;"><b> Please confirm your password first. </b></label>
+            <br>
+            <br>
+
+            <input class="input100" type="password" name="password" placeholder="Password" style="width:250px;height:30px;">
+            <br>
+            <label style="font-size: 16px; color:red;">{{ passmsg }}</label>
+            <p>&nbsp</p>
+            <p>&nbsp</p>
+            
+
+
+            
+
+		    <button type="submit" class="btn cryptos-btn btn-space">Delete Permanently</button>
+            <div class="container" style="width:100%;height:100px;"></div>
+            </center>
+			
+    	</form>
+    </div>
+</section>
+    
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{% static 'account/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'account/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'account/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'account/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'account/js/active.js' %}"></script>
+
+</body>
+</html>
+

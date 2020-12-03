@@ -1,0 +1,154 @@
+{% extends 'admins/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+	<div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+	
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p>Welcome to <span>Online Service Provider</span> You are accessing as an admin.</p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a href="/admins/logout">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="cryptos-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="cryptosNav">
+
+                        <!-- Logo -->
+                        <a class="nav-brand" href="#"><img src="img/core-img/logo.png" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="/admins/profile">{{ user }}</a></li>
+							        <li><a href="/admins/Addadmin">Add admins</a></li>
+							        <li><a href="/admins/Editadmin">Edit Profile</a></li>
+                                    <li><a href="#">Deleted Users</a>
+                                        <ul class="dropdown">
+                                            <li><a href="/admins/delCust">Customers</a></li>
+                                            <li><a href="/admins/delProv">Providers</a></li>
+                                        </ul>
+                                    </li>  
+                                </ul>
+
+
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section    class="cryptos-video-area section-padding-100-0 bg-img bg-transparent"
+                style="background-image: url({% static 'admins/img/bg-img/adminbg.jpg' %}); background-style: cover;">
+        <div class="container">
+            <div class="row align-items-center">
+                		<div class="container" align="center">
+							<div class="wrap-login100" style="width:60%;">
+                                <form method="post" novalidate >
+                                    {% csrf_token %}
+                                    <span class="login100-form-title p-b-26">
+                                        Edit Profile - Enter new details
+                                    </span>
+                                    <label style="font-size: 20px; color: black; display: inline;">First Name</label>
+                                    <br>
+                                    <br>
+                                    <div class="wrap-input100" >
+                                        <input class="input100" type="text" name="firstname">
+                                        <span class="focus-input100" data-placeholder="{{ prev.firstname }}"></span>
+                                    </div>
+                                    <label style="font-size: 20px; color: black; display: inline;">Last Name</label>
+                                    <br>
+                                    <br>
+
+                                    <div class="wrap-input100" >
+                                        <input class="input100" type="text" name="lastname">
+                                        <span class="focus-input100" data-placeholder="{{ prev.lastname }}"></span>
+                                    </div>
+                                    <label style="font-size: 20px; color: black; display: inline;">Phone</label>
+                                    <br>
+                                    <br>
+
+									<div class="wrap-input100">
+                                        <input class="input100" type="number" name="phone">
+                                        <span class="focus-input100" data-placeholder="+880{{ prev.phone }}"></span>
+                                    </div>
+                                    <label style="font-size: 20px; color: black; display: inline;">Email</label>
+                                    <br>
+                                    <br>
+
+                                    <div class="wrap-input100" data-validate = "Valid email is: a@b.c">
+                                        <input class="input100" type="text" name="email">
+                                        <span class="focus-input100" data-placeholder="{{ prev.email }}"></span>
+                                    </div>
+                                    <label style="font-size: 20px; color: black; display: inline;">Password</label>
+                                    <br>
+                                    <br>
+
+									<div class="wrap-input100" data-validate="Enter password">
+										<span class="btn-show-pass">
+											<i class="zmdi zmdi-eye"></i>
+										</span>
+										<input class="input100" type="password" name="password">
+										<span class="focus-input100" data-placeholder="Password"></span>
+									</div>
+
+
+                                    <center>
+                                        <button type="submit" class="cryptos-btn" style="width: 200px;">
+                                            Change
+                                        </button>
+                                    </center>
+
+                                </form>    
+		                    </div>          
+                        </div> 
+            </div>
+        </div>
+
+        <h1>&nbsp</h1>
+
+    </section>
+
+
+{% endblock %}

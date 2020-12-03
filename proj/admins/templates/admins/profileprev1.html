@@ -1,0 +1,42 @@
+{% extends 'admins/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% include 'admins/includes/navbaritems.html' %}
+
+
+
+<h1></h1>
+
+<center>
+<div class="card-columns" style="width: 70%;">
+<div class="card" style="width: 20rem;">
+	<div class="card-body">
+		<h5 class="card-title">Category</h5>
+	</div>
+	<form method="post" enctype="multipart/form-data" novalidate>
+		{% csrf_token %}
+		{{ catform }}
+		<button type="submit" class="button_gray">Add</button>
+	</form>
+	
+</div>
+
+<div class="card" style="width: 20rem;">
+	<div class="card-body">
+		<h5 class="card-title">Service</h5>
+	</div>
+	<form method="post" enctype="multipart/form-data" novalidate>
+		{% csrf_token %}
+		{{ servform }}
+		<button type="submit" class="button_gray">Add</button>
+	</form>
+	
+</div>
+</div>
+
+</center>
+
+{% endblock %}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+crossorigin=""></script>   
+    {% load static %}
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'account/img/core-img/favicon.ico' %}">
+    <link rel="shortcut icon" href="{% static 'navmenu/../favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'navmenu/css/default.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'navmenu/css/component.css' %}" />
+    <script src="{% static 'navmenu/js/modernizr.custom.js' %}"></script>
+    <!-- Core Stylesheet -->
+     <link rel="stylesheet" href="{% static 'account/style.css' %}">
+
+</head>
+
+<body>
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+
+<header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p style="font-size: 20px;">Welcome to <span>Online Service Provider</span> You are accessing as a <i><b><span>customer</span></i></b></p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a style="font-size: 20px;" href="/account/logout">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="cryptos-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="cryptosNav">
+
+                        <!-- Logo -->
+                        <a class="nav-brand" href="#"><img src="{% static 'account/img/core-img/logo.png' %}" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="/account/profile">{{ user }}</a></li>
+                                    <li><a href="/account/Editcustomer">Edit Account</a></li>
+                                    {% if cart != "None" %}
+                                        <li><a href="#">Cart</a>
+                                            <ul class="dropdown" style="width: 300px;">
+                                                {% for c in cartobjs %}
+                                                    <li><a href="#">{{ c.provname }}</a></li>
+                                                            
+                                                {% endfor %}
+                                                <li><a href="/account/finishcart">&nbsp Finish Cart &nbsp</a>
+                                            
+                                            </ul>
+                                        </li>
+                                    {% endif %}
+
+                                    <li><a href="#">Orders</a>
+                                        <ul class="dropdown" style="width: 200px;">
+                                            <li><a href="/account/pending_order">Pending Orders | <font color="orange">{{ totalPending }}</font></a></li>
+                                            <li><a href="/account/accepted_order">Accepted Orders | <font color="orange">{{ totalAccepted }}</font></a></li>
+                                            <li><a href="/account/PastOrders">Past Orders | <font color="orange">{{ totalPast }}</font></a></li>
+                                        </ul>
+                                    </li>                            
+                                </ul>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <section class="currency-calculator-area section-padding-100 bg-img bg-overlay" style="background-image: url(img/bg-img/bg-2.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center white mx-auto">
+                        <h3 class="mb-4">Edit Order Info</h3>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <div class="container" style=" width: 100%; height: 30px;" ></div>
+
+    <center>
+    </form> 
+    
+    <div class="container" style="width: 100%; height: 50px;" ></div>
+            {% if totalmsg == "0" %}
+                <h1> No New messages </h1>
+            {% else %}
+                {% for m in msgs %}
+                    {% if m.who == "0" %}
+                        <p style="text-align: right; font-size:20px; color:orange"> Me: {{ m.msgtxt }} &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</p>
+                        <p style ="text-align: right; font-size:20px;">{{ m.time }}  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</p>
+                    {% else %}
+                        <p style="text-align: left; font-size:20px; color:black"> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Provider: {{ m.msgtxt }} </p>
+                        <p style ="text-align: left; font-size:20px;"> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp {{ m.time }}</p>
+                    {% endif %}
+                {% endfor %}
+
+            {% endif %}
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="container" style="border-style: solid 2px;"></div>
+            <textarea rows="3" cols="50" name="sentmsg" ></textarea>
+            <p style="color: black; font-size: 20px;">Enter Your Message</p>
+            <button type="submit" class="btn cryptos-btn" name="sendbtn" >Send</button>
+        </form>
+    <div class="container" style="width: 100%; height: 50px;" ></div>
+    </center>
+
+</script>
+	
+	<script src="{% static 'account/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'account/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'account/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'account/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'account/js/active.js' %}"></script>
+</body>
+
+</html>

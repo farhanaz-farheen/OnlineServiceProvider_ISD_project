@@ -1,0 +1,17 @@
+
+{% extends 'provider/base.html' %}
+{% block content %}
+
+	<p></p>
+	<div class="bslf">
+		<form method="post" novalidate>
+			{% csrf_token %}
+			<h2 class="text-center">Add Promo Code</h2>
+			{{ form }}
+			<p></p>
+		    <button type="submit">Add</button>
+		    <button> <a href="/provider/profile">Back</a></button>
+    	</form>
+    </div>
+
+{% endblock %}

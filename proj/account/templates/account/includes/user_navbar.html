@@ -1,0 +1,72 @@
+
+    <div class="container">
+        <!-- Logo and responsive toggle -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" style="color: black;">
+                <span class="glyphicon glyphicon-user"></span> 
+                {{ user }}
+            </a>
+        </div>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right">
+                {% if cart != "None" %}
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-shopping-cart"></span> {{ cart }} </a>
+                    <ul class="dropdown-menu" aria-labelledby="about-us">
+                        <div class="container" style="width: 200px;background-color: #0b0d4d;">
+                            {% for c in cartobjs %}
+                            
+                                <p style="color: white; font-size: 18px; text-decoration: underline;">
+                                    {{ c.provname }}
+                                </p>
+                                <p style="color: white; font-size: 16px;
+                                border-bottom: 2px solid; border-color: white;">
+                                    {{ c.service }}
+                                </p>                            
+                            {% endfor %}
+                            </p>
+                            <a href="/account/finishcart" 
+                                style="color:white; font-size: 20px;">&nbsp Finish Cart &nbsp</a>
+                            </p>
+                        </div>
+                    </ul>
+                </li>
+                {% endif %}
+                {% if totalPending != "None" %}
+                <li>
+                    <a href="/account/pending_order"><span class="glyphicon glyphicon-gift"></span>Pending Orders--{{ totalPending }}</a>
+                    
+                </li>
+                {% endif %}
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-search"></span> Search </a>
+                    <ul class="dropdown-menu" aria-labelledby="about-us">
+                        <div class="container" style="height: 500px; width: 700px;background-color: white;">
+                            <div class="container" style="height: 20px; width: 100%;">
+                            </div>
+                            <form method="post" novalidate>
+                                {% csrf_token %}
+                                {% for field in searchform %}
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">{{ field.label_tag }}</label> 
+                                        {{ field }}
+                                    </div>
+                                {% endfor %}    
+                                <button name="search" type="submit">Submit</button>
+                            </form>  
+                        </div>
+                    </ul>                 
+                </li>
+                <li>
+                    <a href="/account/logout">Logout</a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    {% load static %}
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'provhome/img/core-img/favicon.ico' %}">
+    <!-- Core Stylesheet -->
+	 <link rel="stylesheet" href="{% static 'provhome/style.css' %}">
+
+</head>
+
+<body>
+    <!-- ##### Preloader ##### -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+    <!-- ##### Header area start ##### -->
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p><font size ="3">Welcome to <span>Online Service Provider.</span> You are accessing as a <span><i><b><font size ="3">Provider</font></b></i></span></font></p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a href="/provider/logout"><font size ="3">Logout</font></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Hero Area Start ##### -->
+    <section class="hero-area">
+        <div class="hero-slides owl-carousel">
+
+            <!-- Single Hero Slide -->
+            <div class="single-hero-slide">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12 col-md-7">
+                            <div class="hero-slides-content">
+                                <h2>Congratulations <span>{{ name }}</span> for joining <span>Online Service Provider</span></h2>
+                                <h6>An online service providing platform that seamlessly connects customers with providers. Selling your services has never been easier.</h6>
+                                <a href="/provider/setup2" class="btn cryptos-btn">Next</a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <div class="hero-slides-thumb">
+                                <img src="{% static 'provhome/img/bg-img/bg3.jpg' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Hero Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{% static 'provhome/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'provhome/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'provhome/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'provhome/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'provhome/js/active.js' %}"></script>
+</body>
+
+</html>

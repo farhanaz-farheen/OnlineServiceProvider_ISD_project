@@ -1,0 +1,32 @@
+<div class="navbar">
+<div class="dropdown" style="float:left;">
+    <button class="dropbtn">{{ user }}</button>
+    <div class="dropdown-content" style="left:0;">
+        <a href="/admins/Addadmin">Add admins</a>
+        <a href="/admins/Editadmin">Edit Profile</a>
+        <a href="/admins/logout">Logout</a>
+    </div>
+</div>
+<div class="dropdown" style="float:right;">
+    <button class="dropbtn1"><img src="/static/images/bell.png" style="height: 40px; width: 40px;"> 
+        {% if totalreqs != 0 %}
+            {{ totalreqs }}
+        {% endif %}
+    </button>
+    <div class="dropdown-content">
+        {% if totalreqs != 0 %}
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                {% for prov in providers %}
+                    <p>Name : {{ prov.name }}</p>
+                    <p>{{ prov.email }}</p>
+                    <p>Phone : {{ prov.phone }}</p>
+                    <p>Category : {{ prov.category }}</p>
+                    <button type="submit" name="btn" class="btn btn-dark btn-space" value="{{ prov.id }}">Details</button>
+                {% endfor %}
+            </form>
+
+        {% endif %}
+    </div>
+</div>
+</div>

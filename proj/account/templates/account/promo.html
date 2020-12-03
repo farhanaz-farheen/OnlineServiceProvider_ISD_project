@@ -1,0 +1,20 @@
+{% extends 'account/base.html' %}
+{% block content %}
+<center>
+	<div class="card-columns">
+		{% for val in value %}
+		<div class="card" style="width: 70%; margin: 30px;">
+			<div class="card-header">
+				{{ val.provname }}
+			</div>
+			<div class="card-body">
+			<p class="card-text"> Code : {{ val.code }}</p>
+			<p class="card-text">Validity: {{ val.startdate }} --- {{ val.enddate }}</p>
+			<p class="card-text">Discount: {{ val.discount }}%</p>
+			</div>
+		</div>
+		{% endfor %}		
+	</div>
+</center>
+
+{% endblock %}

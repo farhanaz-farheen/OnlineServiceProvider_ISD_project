@@ -1,0 +1,5 @@
+				<button type="submit" name="btn" class="btn cryptos-btn btn-space" style="margin-right: 50px;" value="{{ order.id }}"><a href="/provider/AcceptOrder">Accept</button>
+
+				<button type="submit" name="btn" class="btn cryptos-btn btn-space" value="{{ order.id }}"><a href= "/provider/RejectOrder">Reject</button>
+
+				<button type="submit" name="btn" class="btn cryptos-btn btn-space" style="margin-left: 50px;" value="{{ order.id }}"><a href = "/provider/negotiate">Send Message</button>

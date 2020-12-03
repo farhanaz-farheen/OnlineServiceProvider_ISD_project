@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    {% load static %}
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'provhome/img/core-img/favicon.ico' %}">
+    <!-- Core Stylesheet -->
+	 <link rel="stylesheet" href="{% static 'provhome/style.css' %}">
+
+</head>
+
+<body>
+    <!-- ##### Preloader ##### -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+    <!-- ##### Header area start ##### -->
+ <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p><font size ="3">Welcome to <span>Online Service Provider.</span> You are accessing as a <span><i><b><font size ="3">Provider</font></b></i></span></font></p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a href="/provider/logout"><font size ="3">Logout</font></a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="cryptos-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="cryptosNav">
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="/provider/profile">Home</a></li>
+                                    <li><a href="/provider/edit">Edit Profile</a>
+                                    </li>
+                                    <li><a href="/provider/editcost">Edit Service Details</a>
+                                    </li>
+                                    <li><a href="/provider/inbox">Inbox</a>
+                                    </li>
+                                    <li><a href="/provider/Processing">Accepted Orders</a>
+                                    </li>
+                                    </li>
+                                    <li><a href="/provider/PastOrders">Past Orders</a>
+                                    </li>
+                                    <li><a href="/provider/editDP">Edit Display Picture</a>
+                                    </li>
+                                    
+                                </ul>
+
+
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+
+
+
+
+
+
+
+
+    <div class="blog-area section-padding-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                        <div class="container form1">
+
+        <center>                     
+        <form method="post" novalidate style="margin: 50px;">
+        {% csrf_token %}
+            <div class="cryptos-blog-sidebar-area">
+            <div class="blog-section-heading mb-50">
+                            <h3>Change Service Details</h3>
+            </div>
+        </div>
+    </center>
+            <label class="my-1 mr-2" for="inlineFormCustomSelectPref"><font size = "5"><b>Service</b></font></label>
+            <center>
+            <select class="custom-select my-1 mr-sm-50" id="inlineFormCustomSelectPref" name="servname">
+                {% for service in services %}
+                    <option value="{{ service }}">{{ service }}</option>
+                {% endfor %}
+            </select>
+            
+            <div class="form-group my-1 mr-sm-50">
+                <input name="cost" class="form-control" placeholder="Cost" >
+            </div>
+            <div class="form-group my-1 mr-sm-50">
+                <input name="desc" class="form-control" placeholder="Description" >
+            </div>
+            <br>
+            </center>
+            <label><font size = "5"><b>Availability</b></font></label>
+
+            <br>
+            <select name="looking" style="width: 100%; height: 40px; font-size: 20px;">
+                <option style="font-size: 20px;" value="busy">Busy</option>
+                <option style="font-size: 20px;" value="available">Available</option>
+            </select>
+            <center>
+            <br>
+            <br>
+        <button type="submit" class="btn btn-secondary my-1">Submit</button>
+    </form>
+    </center>
+    </div>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <div class="cryptos-blog-sidebar-area">
+                        {% if trendlen != 0 %}
+                        <!-- Section Heading -->
+                        <div class="blog-section-heading mb-50">
+                            <h3>Trending Services</h3>
+                        </div>
+                        
+                            <!-- ONE RECOMMNDATION CATEGORY BEGINS HERE -->
+                                <div class="single-blog-area blog-style-3 d-flex align-items-center mb-15">
+                                    <div class="blog-content">
+                                        <div class="meta-data">
+                                            <a style="font-size: 20px;">Service Providers with High Rating</a>
+                                        </div>               
+                                    </div>
+                                </div>
+                            <!-- LIST ALL SERVICES UNDER THIS RECOMMENDATION CATEGORY --> 
+                            {% for o in trend %}
+                                <div class="single-blog-area blog-style-3 d-flex align-items-center mb-15">
+                                    <!-- Thumbnail -->
+                                    <div class="blog-thumbnail">
+                                        <img src="{{ o.url }}" alt="">
+                                    </div>
+                                    <!-- Content -->
+                                    <div class="blog-content">
+                                        <a href="/account/searchDetail/{{ o.id }}" class="post-title">{{ o.provname }}</a>  
+                                        <div class="meta-data">
+                                            <a>{{ o.servname }}</a>
+                                        </div>  
+                                    </div>
+                                     
+                                </div>
+                            {% endfor %}
+                            <!--END OF SERVICE LIST UNDER THIS RECO CATEGORY-->
+                            <!-- END OF THIS CATEGORY -->
+                            
+                        {% endif %}                 
+                        
+                    </div>
+                </div>                
+
+            </div>
+        </div>
+
+
+
+
+    <script src="{% static 'provhome/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'provhome/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'provhome/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'provhome/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'provhome/js/active.js' %}"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+<div class="blog-area section-padding-150">
+        <div class="container">
+            <div class="row">
+
+	<form method="post" novalidate style="margin: 20px;">
+		{% csrf_token %}
+			<label class="my-1 mr-2" for="inlineFormCustomSelectPref"><font size = "5"><b>Service</b></font></label>
+			<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="servname">
+				{% for service in services %}
+					<option value="{{ service }}">{{ service }}</option>
+				{% endfor %}
+			</select>
+            
+			<div class="form-group my-1 mr-sm-2">
+				<input name="cost" class="form-control" placeholder="Cost" >
+			</div>
+            <div class="form-group my-1 mr-sm-2">
+                <input name="desc" class="form-control" placeholder="Description" >
+            </div>
+            <div class="form-group my-1 mr-sm-2">
+                <input name="looking" class="form-control" placeholder="Availability (available/busy)" >
+            </div>
+		<button type="submit" class="btn btn-secondary my-1">Submit</button>
+	</form>
+
+
+
+      <div class="col-12 col-lg-4">
+                    <div class="cryptos-blog-sidebar-area">
+
+                       
+                        <div class="blog-section-heading mb-50">
+                            <h3>Trending Services</h3>
+                        </div>
+
+                        
+                        <div class="single-blog-area blog-style-3 d-flex align-items-center mb-15">
+                            
+                            <div class="blog-thumbnail">
+                                <img src="{% static 'provhome/img/blog-img/4.jpg'%}" alt="">
+                            </div>
+                            
+                            <div class="blog-content">
+                                <a href="#" class="post-title">Home Tutoring</a>
+                                <div class="meta-data">
+                                    <a href="#">Learning has never been easier</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="single-blog-area blog-style-3 d-flex align-items-center mb-15">
+                            
+                            <div class="blog-thumbnail">
+                                <img src="{% static 'provhome/img/blog-img/blog4.jpg'%}" alt="">
+                            </div>
+                            
+                            <div class="blog-content">
+                                <a href="#" class="post-title">Interior Designing</a>
+                                <div class="meta-data">
+                                    <a href="#">Live in your dreamhouse</a>
+                                </div>
+                            </div>
+                        </div>
+
+                      
+                        <div class="single-blog-area blog-style-3 d-flex align-items-center mb-15">
+                            
+                            <div class="blog-thumbnail">
+                                <img src="{% static 'provhome/img/blog-img/3.jpg'%}" alt="">
+                            </div>
+                            
+                            <div class="blog-content">
+                                <a href="#" class="post-title">Event Planning</a>
+                                <div class="meta-data">
+                                    <a href="#">The best organizers are here</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+	<script src="{% static 'provhome/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    
+    <script src="{% static 'provhome/js/bootstrap/popper.min.js' %}"></script>
+    
+    <script src="{% static 'provhome/js/bootstrap/bootstrap.min.js' %}"></script>
+    
+    <script src="{% static 'provhome/js/plugins/plugins.js' %}"></script>
+    
+    <script src="{% static 'provhome/js/active.js' %}"></script>
+
+</body>
+</html>
+-->
+

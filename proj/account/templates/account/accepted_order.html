@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+crossorigin=""></script> 
+    {% load static %}
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'account/img/core-img/favicon.ico' %}">
+    <link rel="shortcut icon" href="{% static 'navmenu/../favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'navmenu/css/default.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'navmenu/css/component.css' %}" />
+    <script src="{% static 'navmenu/js/modernizr.custom.js' %}"></script>
+    <!-- Core Stylesheet -->
+     <link rel="stylesheet" href="{% static 'account/style.css' %}">
+
+</head>
+
+<body>
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+
+<header class="header-area">
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p style="font-size: 20px;">Welcome to <span>Online Service Provider</span> You are accessing as a <i><b><span>customer</span></i></b></p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a style="font-size: 20px;" href="/account/logout">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar Area -->
+        <div class="cryptos-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="cryptosNav">
+
+                        <!-- Logo -->
+                        <a class="nav-brand" href="#"><img src="{% static 'account/img/core-img/logo.png' %}" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                  <ul>
+                                    <li><a href="/account/profile">{{ user }}</a></li>
+                                    <li><a href="/account/Editcustomer">Edit Account</a></li>
+                                    {% if cart != "None" %}
+                                        <li><a href="#">Cart</a>
+                                            <ul class="dropdown" style="width: 300px;">
+                                                {% for c in cartobjs %}
+                                                    <li><a href="#">{{ c.provname }}</a></li>
+                                                            
+                                                {% endfor %}
+                                                <li><a href="/account/finishcart">&nbsp Finish Cart &nbsp</a>
+                                            
+                                            </ul>
+                                        </li>
+                                    {% endif %}
+
+                                    <li><a href="#">Orders</a>
+                                        <ul class="dropdown" style="width: 200px;">
+                                            <li><a href="/account/pending_order">Pending Orders | <font color="orange">{{ totalPending }}</font></a></li>
+                                            <li><a href="/account/accepted_order">Accepted Orders | <font color="orange">{{ totalAccepted }}</font></a></li>
+                                            <li><a href="/account/PastOrders">Past Orders | <font color="orange">{{ totalPast }}</font></a></li>
+                                        </ul>
+                                    </li>                            
+                                </ul>
+
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <section class="currency-calculator-area section-padding-100 bg-img bg-overlay" style="background-image: url(img/bg-img/bg-2.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center white mx-auto">
+                        <h3 class="mb-4">Accepted Orders</h3>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    <center>
+    <form method="post" novalidate>
+        {% csrf_token %}
+		{% for val in value %}
+			
+					<p style="color: black; font-size: 26px;">Time of Order: {{ val.dtime }}</p>
+					{% for os in val.ordser %}
+				<table style="font-family: arial, sans-serif; border-collapse: collapse; width: 90%;">
+					<tr>
+						<th style=" border: 1px solid #dddddd;
+  										text-align: left;
+  										padding: 8px;">Provider</th>
+						<th style=" border: 1px solid #dddddd;
+  										text-align: left;
+  										padding: 8px;">Service</th>
+						<th style=" border: 1px solid #dddddd;
+  										text-align: left;
+  										padding: 8px;">Cost</th>
+						<th style=" border: 1px solid #dddddd;
+  										text-align: left;
+  										padding: 8px;">Description</th>
+						<th style=" border: 1px solid #dddddd;
+  										text-align: left;
+  										padding: 8px;">Delivery Time</th>
+					</tr>
+				
+			
+					
+						<tr>
+							<th style=" border: 1px solid #dddddd;
+  										text-align: left;
+  										padding: 8px;">
+  								{{ os.provname }}
+  							</th>
+							<th style=" border: 1px solid #dddddd;
+  										text-align: left;
+  										padding: 8px;">{{ os.servname }}</th>
+							<th style=" border: 1px solid #dddddd;
+  										text-align: left;
+  										padding: 8px;">{{ os.cost }}</th>
+							<th style=" border: 1px solid #dddddd;
+  										text-align: left;
+  										padding: 8px;">{{ os.desc }}</th>
+							<th style=" border: 1px solid #dddddd;
+  										text-align: left;
+  										padding: 8px;">{{ os.dtime }}</th>
+						</tr>
+						<tr>
+							<th style=" border: 1px solid #dddddd;
+  										text-align: left;
+  										padding: 8px;">
+  								Delivery Address
+  							</th>
+							<th style=" border: 1px solid #dddddd;
+  										text-align: center;
+  										padding: 8px;"
+  								colspan="4">
+								{{ os.deliveryAddress }}
+							</th>
+						</tr>
+						</table>
+						<div style="margin: 10px 10px 10px 10px; height: 500px; width: 800px;" id="map{{ os.id }}"></div>
+						<div class="container" style="width: 100%; height: 30px;"></div>
+                        <button type="submit" class="btn cryptos-btn" style="margin-right: 50px" name="btn" value="accept_{{ os.id }}">Received</button>
+						<button type="submit" class="btn cryptos-btn" style="margin-right: 50px" name="btn" value="cancel_{{ os.id }}">Cancel</button>
+						<button type="submit" class="btn cryptos-btn" name="btn" value="edit_{{ os.id }}">Message</button>
+						<!-- <button type="submit" name="btn" class="btn btn-dark btn-space" value="{{ os.id }}">Cancel</button> -->
+						<div class="container" style="width: 100%; height: 30px;"></div>
+					{% endfor %}
+					<div class="container" style=" height: 50px; width: 100%;">
+						
+					</div>				
+				
+		{% endfor %}
+	</form>	
+	</center>
+	<div class="container" style="width: 100%; height: 100px;"></div>
+	<script type="text/javascript">
+		var obj = {{ ll|safe }};
+		var i=1;
+		for(var key in obj) {
+		        var myLatLng = {lat: obj[key][0], lng: obj[key][1]};
+		        
+		        console.log(obj[key][0]);
+		        console.log(obj[key][1]);
+		        console.log(obj[key]);
+		        /*
+		        var map = new google.maps.Map(document.getElementById('map'+key), {
+		          zoom: 12,
+		          center: myLatLng
+		        });
+
+		        var marker = new google.maps.Marker({
+		          position: myLatLng,
+		          map: map
+		        });*/  
+				var mapid = 'map'+key;	    	
+		        var map = L.map(mapid).setView([obj[key][0], obj[key][1]], 13);
+		        var marker = L.marker([obj[key][0], obj[key][1]]).addTo(map);
+		        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+		            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		            maxZoom: 18,
+		            id: 'mapbox.streets',
+		            accessToken: 'pk.eyJ1Ijoic2lwMTYiLCJhIjoiY2p5OGQ5NnI1MDh3ZTNvdDF1d2xjMXJiZiJ9.PzHdvFM8jq5YI09xsShShA'
+		        }).addTo(map);	
+			}
+		
+	</script>
+
+
+	<script src="{% static 'provhome/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'provhome/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'provhome/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'provhome/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'provhome/js/active.js' %}"></script>
+
+
+
+    <script src="{% static 'account/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'account/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'account/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'account/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'account/js/active.js' %}"></script>
+</body>
+
+</html>
+
+

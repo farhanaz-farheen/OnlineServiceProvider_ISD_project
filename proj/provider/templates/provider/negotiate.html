@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    {% load static %}
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'provhome/img/core-img/favicon.ico' %}">
+    <!-- Core Stylesheet -->
+	 <link rel="stylesheet" href="{% static 'provhome/style.css' %}">
+
+</head>
+
+<body>
+    <!-- ##### Preloader ##### -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+    <!-- ##### Header area start ##### -->
+ <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p><font size ="3">Welcome to <span>Online Service Provider.</span> You are accessing as a <span><i><b><font size ="3">Provider</font></b></i></span></font></p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a href="/provider/logout"><font size ="3">Logout</font></a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="cryptos-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="cryptosNav">
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="/provider/profile">Home</a></li>
+                                    <li><a href="/provider/edit">Edit Profile</a>
+                                    </li>
+                                    <li><a href="/provider/editcost">Edit Service Details</a>
+                                    </li>
+                                    <li><a href="/provider/inbox">Inbox</a>
+                                    </li>
+                                    <li><a href="/provider/Processing">Accepted Orders</a>
+                                    </li>
+                                     <li><a href="/provider/PastOrders">Past Orders</a>
+                                    </li>
+                                    <li><a href="/provider/editDP">Edit Display Picture</a>
+                                    </li>
+                                    
+                                </ul>
+
+
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    
+	<p></p>
+	<div class="bslf">
+		<form method="post" novalidate>
+			{% csrf_token %}
+			<h2 class="text-center">Negotiate with Customer</h2>
+			<center>
+            <label style="font-size: 16px;">Cost</label>
+			<input type="number" name="cost">
+            <br>
+            <label style="font-size: 16px;">Message</label>
+            <br>
+            <textarea rows="3" cols="50" name="message" ></textarea>
+            <br>
+			<p></p>
+		    <button type="submit" class="btn cryptos-btn btn-space">Send</button>
+            </center>
+            <div class="container" style="width:100%;height:50px"></div>
+
+			{% if totalmsg == "0" %}
+				No New messages
+			{% else %}
+				{% for m in msgs %}
+					{% if m.who == "1" %}
+						<p style="text-align: right; font-size:20px; color:orange"> Me: {{ m.msgtxt }} &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</p>
+						<p style ="text-align: right; font-size:20px;">{{ m.time }}  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</p>
+					{% else %}
+						<p style="text-align: left; font-size:20px; color:black"> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Customer: {{ m.msgtxt }} </p>
+                        <p style ="text-align: left; font-size:20px;"> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp {{ m.time }}</p>
+					{% endif %}
+				{% endfor %}
+
+			{% endif %}
+    	</form>
+    </div>
+    
+
+
+	<script src="{% static 'provhome/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'provhome/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'provhome/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'provhome/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'provhome/js/active.js' %}"></script>
+
+</body>
+</html>
+

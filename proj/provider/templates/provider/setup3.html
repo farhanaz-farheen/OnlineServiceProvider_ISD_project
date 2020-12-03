@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    {% load static %}
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'provhome/img/core-img/favicon.ico' %}">
+    <!-- Core Stylesheet -->
+	 <link rel="stylesheet" href="{% static 'provhome/style.css' %}">
+
+</head>
+
+<body>
+    <!-- ##### Preloader ##### -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+    <!-- ##### Header area start ##### -->
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p><font size ="3">Welcome to <span>Online Service Provider.</span> You are accessing as a <span><i><b><font size ="3">Provider</font></b></i></span></font></p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a href="/provider/logout"><font size ="3">Logout</font></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+        <div class="cryptos-guide-line section-padding-100 bg-img"
+            style="background-image: url({% static 'provider/back4.jpg' %});">
+        
+
+    <center>
+        <h1>&nbsp</h1>
+        <h3 style="font-size: 50px;">Welcome <span style="color: orange;">{{ user }}</span></h3>
+        <h3>Please Update Service Information</h3>
+        <div class="container" style="width: 100%; height: 70px;"></div>
+        <form method="post" style="font-size: 30px;" novalidate>
+            {% csrf_token %}
+            {% for s in als %}
+                <div class="container" style="padding: 20px;">
+
+
+                    <h5 style="color: orange; font-size: 40px;">{{ s }}</h5>
+                    <input type="number" name="cost_{{ forloop.counter }}" placeholder="Cost">
+                    <p></p>
+                    <p></p>
+                    <input type="text" name="desc_{{ forloop.counter }}" placeholder="Description">
+                    <p></p>
+                    <p></p>
+                    <input type="hidden" value="{{ s }}" name="service_{{ forloop.counter }}">
+                    <p></p>
+                    <p></p>
+
+                </div>            
+            {% endfor %}
+            <button type="submit" class="btn cryptos-btn" >Submit</button>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+        </form>
+        <div class="container" style="width: 100%; height: 200px;"></div>
+    </center>
+    </div>
+    <!-- ##### Footer Area Start ##### -->
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{% static 'provhome/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'provhome/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'provhome/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'provhome/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'provhome/js/active.js' %}"></script>
+</body>
+
+</html>

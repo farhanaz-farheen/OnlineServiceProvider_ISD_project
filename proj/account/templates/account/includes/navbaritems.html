@@ -1,0 +1,57 @@
+
+
+{% if user == "None" %}
+<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+		<li class="nav-item">
+			<a class="nav-link" href="/account/login">Login</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/account/register">Signup</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/account/search">Search</a>
+		</li>		
+		<li class="nav-item">
+			<a class="nav-link" href="/provider">Provider</a>
+		</li>   
+	</ul>
+</div>
+
+{% else %}
+<div class="navbar">
+	<div class="dropdown">
+	    <button class="dropbtn">{{ user }}</button>
+	    <div class="dropdown-content" style="left: 0;">
+	        <a href="/account/Editcustomer">Edit Profile</a>
+	        <a href="/account/logout">Logout</a>
+	    </div>
+	</div>
+	{% if cart != "None" %}
+	<div class="dropdown">
+	    <button class="dropbtn">Cart--{{ cart }}</button>
+	    
+	    <div class="dropdown-content">
+	    	{% for c in cartobjs %}
+	        <a href="#">
+	        	{{ c.provname }}--{{ c.service }}
+	        </a>
+	        {% endfor %}
+	        <a href="/account/finishcart">Finish Cart</a>
+	    </div>
+	    
+	</div>
+	{% endif %}
+	{% if totalPending != "None" %}
+	<div class="dropdown">
+	    <a class="dropbtn" href="/account/pending_order">Pending Orders--{{ totalPending }}</a>
+	    
+	</div>
+	{% endif %}
+	<div class="dropdown">
+		<a href="/account/search" class="dropbtn">Search</a>
+	</div>
+
+</div>
+
+{% endif %}

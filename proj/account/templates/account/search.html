@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    {% load static %}
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'account/img/core-img/favicon.ico' %}">
+    <link rel="shortcut icon" href="{% static 'navmenu/../favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'navmenu/css/default.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'navmenu/css/component.css' %}" />
+    <script src="{% static 'navmenu/js/modernizr.custom.js' %}"></script>
+    <!-- Core Stylesheet -->
+     <link rel="stylesheet" href="{% static 'account/style.css' %}">
+
+    <style>
+        .slidecontainer {
+          width: 100%;
+        }
+
+        .slider {
+          -webkit-appearance: none;
+          width: 60%;
+          height: 25px;
+          background: #d3d3d3;
+          outline: none;
+          opacity: 0.7;
+          -webkit-transition: .2s;
+          transition: opacity .2s;
+        }
+
+        .slider:hover {
+          opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 25px;
+          height: 25px;
+          background: #4CAF50;
+          cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+          width: 25px;
+          height: 25px;
+          background: #4CAF50;
+          cursor: pointer;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+
+<header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p style="font-size: 20px;">Welcome to <span>Online Service Provider</span> You are accessing as a <i><b><span>customer</span></i></b></p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a style="font-size: 20px;" href="/account/logout">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="cryptos-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="cryptosNav">
+
+                        <!-- Logo -->
+                        <a class="nav-brand" href="#"><img src="{% static 'account/img/core-img/logo.png' %}" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="/account/profile">{{ user }}</a></li>
+                                    <li><a href="/account/Editcustomer">Edit Account</a></li>
+                                    {% if cart != "None" %}
+                                        <li><a href="#">Cart</a>
+                                            <ul class="dropdown" style="width: 300px;">
+                                                {% for c in cartobjs %}
+                                                    <li><a href="#">{{ c.provname }}</a></li>
+                                                            
+                                                {% endfor %}
+                                                <li><a href="/account/finishcart">&nbsp Finish Cart &nbsp</a>
+                                            
+                                            </ul>
+                                        </li>
+                                    {% endif %}
+
+                                    <li><a href="#">Orders</a>
+                                        <ul class="dropdown" style="width: 200px;">
+                                            <li><a href="/account/pending_order">Pending Orders | <font color="orange">{{ totalPending }}</font></a></li>
+                                            <li><a href="/account/accepted_order">Accepted Orders | <font color="orange">{{ totalAccepted }}</font></a></li>
+                                            <li><a href="/account/PastOrders">Past Orders | <font color="orange">{{ totalPast }}</font></a></li>
+                                        </ul>
+                                    </li>                            
+                                </ul>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <section class="currency-calculator-area section-padding-100 bg-img bg-overlay" style="background-image: url(img/bg-img/bg-2.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center white mx-auto">
+                        <h3 class="mb-4">Search Results</h3>
+
+                        {% if total == "0" %}
+                        <h5 class="mb-2">Sorry, There are no results for the given input.</h5>
+                        <p>Try again with different options, keywords.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+	
+	{% if total != "0" %}
+
+        <section    class="cryptos-video-area section-padding-100-0 bg-img"
+                    style="background-color: white; background-style: cover;">
+            <div class="container">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-6">
+                            <div class="about-content mb-100">
+                                <div class="section-heading">
+                                    <button type="submit" class="btn cryptos-btn">Apply Filter</button>
+                                    <p>&nbsp</p>
+                                    <input style="width: 300px;" type="text" class="form-control" name="district" placeholder="Area of Interest">
+                                    <br>
+                                    <p style="color: black;">Cost Above: <span id="minval"></span></p>
+                                    <input type="range" min="1" max="10000" value="1" class="slider" id="cost_min" name="cost_min">
+                                    <p style="color: black;">Cost Below: <span id="maxval"></span></p>
+                                    <input type="range" min="1" max="10000" value="10000" class="slider" id="cost_max" name="cost_max">
+
+                                    <p style="color: black;">Rating Above: <span id="ratemin"></span></p>
+                                    <input type="range" min="1" max="5" value="1" class="slider" id="rating_min" name="rating_min">
+                                    <p style="color: black;">Rating Below: <span id="ratemax"></span></p>
+                                    <input type="range" min="1" max="5" value="5" class="slider" id="rating_max" name="rating_max">
+
+                                    <br>
+                                    <p style="color: black; display: inline;">Show No Rating </p>
+                                    {{ form.norating }}
+                                    <br> 
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="video-area mb-100">
+                                <h5>Service</h5>
+                                {{ form.service }} 
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+
+        <div class="blog-area section-padding-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div class="cryptos-blog-posts">
+                            <div class="row">
+
+                                <div class="col-12">
+                        		    <form method="post" novalidate>
+                        			{% csrf_token %}
+                        			{% for val in sp %}
+
+                                        <!-- Single Blog Area -->
+                                        <div class="single-blog-area d-flex align-items-start">
+                                            <!-- Thumbnail -->
+                                            <div class="blog-thumbnail">
+                                                <img src="{{ val.provimg }}" style="max-width: 100px; max-height: 100px;" alt="">
+                                            </div>
+                                            <!-- Content -->
+                                            <div class="blog-content">
+                                                <a href="/account/searchDetail/{{ val.id }}" class="post-title">{{ val.provname }}</a>
+                                                <div class="meta-data">
+                                                    <a href="#">Cost: {{ val.cost }} BDT</a> |
+                                                    <a href="#">Rating: {{ val.rating }}</a>
+                                                </div>
+                                                <p>{{ val.desc }}</p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    </form>
+
+                                        
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
+                </div>
+
+            </div>
+			
+		</div>	
+		
+	{% endif %}
+
+    <script>
+        var slider1 = document.getElementById("cost_min");
+        var output1 = document.getElementById("minval");
+        output1.innerHTML = slider1.value;
+
+        slider1.oninput = function() {
+          output1.innerHTML = this.value;
+        }
+        var slider2 = document.getElementById("cost_max");
+        var output2= document.getElementById("maxval");
+        output2.innerHTML = slider2.value;
+
+        slider2.oninput = function() {
+          output2.innerHTML = this.value;
+        }
+
+        var slider3 = document.getElementById("rating_min");
+        var output3 = document.getElementById("ratemin");
+        output3.innerHTML = slider3.value;
+
+        slider3.oninput = function() {
+          output3.innerHTML = this.value;
+        }
+        var slider4 = document.getElementById("rating_max");
+        var output4= document.getElementById("ratemax");
+        output4.innerHTML = slider4.value;
+
+        slider4.oninput = function() {
+          output4.innerHTML = this.value;
+        }
+
+    </script>
+
+
+
+    <script src="{% static 'account/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'account/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'account/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'account/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'account/js/active.js' %}"></script>
+</body>
+
+</html>

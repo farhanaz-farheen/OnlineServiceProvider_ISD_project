@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    {% load static %}
+
+    <!-- Favicon -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="icon" href="{% static 'account/img/core-img/favicon.ico' %}">
+    <link rel="shortcut icon" href="{% static 'navmenu/../favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'navmenu/css/default.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'navmenu/css/component.css' %}" />
+    <script src="{% static 'navmenu/js/modernizr.custom.js' %}"></script>
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="{% static 'account/style.css' %}">
+
+    <style type="text/css">
+        .stardiv {
+            position: relative;
+            width: 150px;
+            display: block;
+            margin-left: 250px;
+        } 
+        .cornerstarimage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            display: block;
+        }
+        img{
+            max-width: 150px;
+        }      
+        .mySlides {display:none;}          
+    </style>
+
+</head>
+
+<body>
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+
+    <header class="header-area">
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p style="font-size: 20px;" >Welcome to <span>Online Service Provider</span> You are accessing as a <span><i>Customer</i></span></p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a style="font-size: 20px;" href="/account">Home</a>
+                                <a style="font-size: 20px;" href="/account/login">Login | Register</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+    <!-- ##### Header Area End ##### -->
+
+    <div class="breadcumb-area">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 col-md-6">
+                    <div class="breadcumb-text">
+                        <h2>{{ servname }}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcumb Thumb Area -->
+        <div class="breadcumb-thumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="breadcumb-thumb">
+                            <img src="{{ servimg }}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1>&nbsp</h1>
+
+
+            <div>
+                <img src="{{ val.provimg }}" style="margin-left: 250px;  max-width: 150px; max-height: 150px;">
+                <h1 style="display: inline-block; margin-left: 50px; font-size: 30px; color: #16664e;">{{ val.provname }}
+                </h1>
+                <br>
+                <p style="display: inline-block; margin-left: 250px; color: black; font-size: 20px;">{{ val.desc }}</p>
+                <br>
+                <p style=" margin-left: 250px; font-size: 20px;"><font color = "blue">Basic Cost | </font><font color="black">
+                {{ val.cost }} BDT</font></p>
+                <p style="margin-left: 250px; color: black; font-size: 20px;">Area: {{ val.location }}</p>
+                
+                <p style="display: inline-block; margin-left: 250px; color: #6f3f99; font-size: 20px; text-decoration: underline;">
+                    {{ val.looking }}
+                </p> 
+                <br>
+                {% if val.ratecount != 0 %}
+                    <p style="display: inline-block; margin-left: 250px;  color: black; font-size: 20px;">Number of ratings: {{ val.ratecount }}</p>
+                    <br>
+                {% else %}    
+                    <p style="display: inline-block; margin-left: 250px;  color: black; font-size: 20px;">{{ val.rating }}</p>
+                    <br>
+                {% endif %}
+            </div>     
+            {% if val.ratecount != 0 %}   
+            <div class="stardiv">
+                <div>
+                <img src="{% static 'account/img/other/stars_blank.png' %}" alt="img">
+                </div>
+                <div class="cornerstarimage" style="width: {{ val.rating }}%;">
+                <img src="{% static 'account/img/other/stars_full.png' %}" alt="">
+                </div>
+            <div>
+            {% else %}
+            <div class="stardiv">
+                <div>
+                <img src="{% static 'account/img/other/stars_blank.png' %}" alt="img">
+                </div>
+                <div class="cornerstarimage" style="width: 0%;">
+                <img src="{% static 'account/img/other/stars_full.png' %}" alt="">
+                </div>
+            <div>             
+            {% endif %}
+    <div class="container" style="width: 100%; height: 50px;"></div>
+
+
+
+            {% if val.totalfeed == "+" %}
+                <div class="container" style="margin-left: 0px;">
+                    <div class="cryptos-blog-sidebar-area">
+
+                        <!-- Section Heading -->
+                        <div class="blog-section-heading mb-50">
+                            <h3>Feedbacks</h3>
+                        </div>
+                        {% for f in val.feedback %}
+                
+                                   
+                        <!-- Single Blog Area -->
+                        <div class="single-blog-area blog-style-3 d-flex align-items-center mb-15">
+                            <!-- Thumbnail -->
+                            <div class="blog-thumbnail">
+                                <img src="{% static 'account/img/default-user.png'%}" style="max-width: 100px;" alt="">
+                            </div>
+                            <!-- Content -->
+                            <div class="blog-content">
+                                <a style="color: orange;" href="#" class="post-title">{{ f.custname }}</a>
+                            </div>
+                        </div>
+                        <p style="display: inline; color: black;">{{ f.feedback }}</p>
+                        {% endfor %} 
+
+                    </div>
+                </div>
+            {% endif %}
+
+
+    <br>
+
+
+    <div class="container" style="width: 100%; height: 50px;"></div>
+
+
+    <script src="{% static 'account/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'account/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'account/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'account/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'account/js/active.js' %}"></script>
+</body>
+
+</html>

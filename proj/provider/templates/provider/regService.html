@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+{% load static %}
+
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'provhome/img/core-img/favicon.ico' %}">
+    <!-- Core Stylesheet -->
+	 <link rel="stylesheet" href="{% static 'provhome/style.css' %}">
+
+</head>
+
+<body>
+    <!-- ##### Preloader ##### -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+    <!-- ##### Header area start ##### -->
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p><font size ="3">Welcome to <span>Online Service Provider.</span> You are accessing as a <span><i><b><font size ="3">Provider</font></b></i></span></font></p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a href="/provider/"><font size ="3">Home</font></a>
+                                <a href="/provider/login"><font size ="3">Login</font></a>
+                                <a href="/provider/register"><font size ="3">Signup</font></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+
+    <div class = "container" style="width: 100%;height: 50px"></div>
+    
+    <div class="blog-area section-padding-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="container form1">
+    
+                        <center>
+                            <div class="container">
+                                <div class="blog-section-heading mb-50">
+                                    <h3>Services you want to offer</h3>
+                                </div>
+                                <p style="font-size: 18px; color: black;" class="text-center">Please select service and required verification image file</p>
+                                <div class = "container" style="width: 100%;height: 20px"></div>
+                                <form method="post" enctype="multipart/form-data" novalidate>
+                                    {% csrf_token %}
+                                        <label>Service:</label>
+                                        {{ form.serviceName }}
+                                        <div class="warntext">
+                                            {{ form.serviceName.errors }}
+                                        </div>
+                                        <div class = "container" style="width: 100%;height: 10px"></div>
+                                        {{ form.serv_idImage }}
+                                        <div class="warntext">
+                                            {{ form.serv_idImage.errors }}
+                                        </div>                                            
+                                    <div class = "container" style="width: 100%;height: 50px"></div>
+                                    <button type="submit" class="btn cryptos-btn btn-space">Submit</button>
+
+                                </form>
+                                <div class = "container" style="width: 100%;height: 50px"></div>
+                                <a href="/provider/regServiceEdit" class="btn cryptos-btn btn-space">Done</a>
+                            </div>
+                        </center>
+
+                    </div>
+                </div>
+
+                 <div class="col-12 col-lg-4">
+                    <div class="cryptos-blog-sidebar-area">
+                        {% if trendlen != 0 %}
+                        <!-- Section Heading -->
+                        <div class="blog-section-heading mb-50">
+                            <h3>Trending Services</h3>
+                        </div>
+                        
+                            <!-- ONE RECOMMNDATION CATEGORY BEGINS HERE -->
+                                <div class="single-blog-area blog-style-3 d-flex align-items-center mb-15">
+                                    <div class="blog-content">
+                                        <div class="meta-data">
+                                            <a style="font-size: 20px;">Service Providers with High Rating</a>
+                                        </div>               
+                                    </div>
+                                </div>
+                            <!-- LIST ALL SERVICES UNDER THIS RECOMMENDATION CATEGORY --> 
+                            {% for o in trend %}
+                                <div class="single-blog-area blog-style-3 d-flex align-items-center mb-15">
+                                    <!-- Thumbnail -->
+                                    <div class="blog-thumbnail">
+                                        <img src="{{ o.url }}" alt="">
+                                    </div>
+                                    <!-- Content -->
+                                    <div class="blog-content">
+                                        <a href="/account/searchDetail/{{ o.id }}" class="post-title">{{ o.provname }}</a>  
+                                        <div class="meta-data">
+                                            <a>{{ o.servname }}</a>
+                                        </div>  
+                                    </div>
+                                     
+                                </div>
+                            {% endfor %}
+                            <!--END OF SERVICE LIST UNDER THIS RECO CATEGORY-->
+                            <!-- END OF THIS CATEGORY -->
+                            
+                        {% endif %}                 
+                        
+                    </div>
+                </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+	    <script src="{% static 'provhome/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'provhome/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'provhome/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'provhome/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'provhome/js/active.js' %}"></script>
+</body>
+
+</html>
+	
+

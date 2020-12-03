@@ -1,0 +1,143 @@
+{% extends 'admins/base.html' %}
+{% load static %}
+{% block content %}
+
+	<div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+	
+    <!-- ##### Header Area Start ##### -->
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p style="font-size: 20px;" >Welcome to <span>Online Service Provider</span> You are accessing as an admin.</p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a style="font-size: 20px;" href="/admins/logout">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="cryptos-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="cryptosNav">
+
+                        <!-- Logo -->
+                        <a class="nav-brand" href="#"><img src="img/core-img/logo.png" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="/admins/profile">{{ user }}</a></li>
+							        <li><a href="/admins/Addadmin">Add admins</a></li>
+							        <li><a href="/admins/Editadmin">Edit Profile</a></li> 
+                                    <li><a href="#">Deleted Users</a>
+                                        <ul class="dropdown">
+                                            <li><a href="/admins/delCust">Customers</a></li>
+                                            <li><a href="/admins/delProv">Providers</a></li>
+                                        </ul>
+                                    </li>
+                                                    
+                                </ul>
+
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ##### Header Area End ##### -->	
+	
+	<div class="limiter">
+		<div class="container-login100"
+                style=" background-image: url({% static 'admins/img/bg-img/251850.jpg' %}); 
+                        background-repeat: no-repeat;
+                        background-size: cover;">
+			<div class="wrap-login100" style="width:600px;">
+				<form method="post" novalidate class="login100-form validate-form">
+                    {% csrf_token %}
+					<span class="login100-form-title p-b-26">
+						Welcome
+					</span>
+
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="text" name="firstname">
+						<span class="focus-input100" data-placeholder="First Name"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="text" name="lastname">
+						<span class="focus-input100" data-placeholder="Last Name"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+						<input class="input100" type="text" name="email">
+						<span class="focus-input100" data-placeholder="Email"></span>
+					</div>
+			     	{% if valid == "False" %}
+					<div class="container" style="color: red; font-size: 18px;">
+			     		Admin with this email already exists
+			     	<p>&nbsp</p>
+			     	</div>
+			     	{% endif %}
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<span class="btn-show-pass">
+							<i class="zmdi zmdi-eye"></i>
+						</span>
+						<input class="input100" type="password" name="password">
+						<span class="focus-input100" data-placeholder="Password"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="number" name="phone">
+						<span class="focus-input100" data-placeholder="Phone"></span>
+					</div>
+
+
+					<center>
+							<button type="submit" class="btn cryptos-btn">
+								Add Admin
+							</button>
+					</center>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>	
+	
+
+{% endblock %}

@@ -1,0 +1,81 @@
+body {
+	background-color: #D4E6F1;
+	background-image: url('/static/images/bg2.jpg');
+	background-size:cover;
+}
+
+.servImg {
+	max-width: 80%;
+	margin: 20px;
+}
+
+.form1 {
+ 	background-color: white; 
+ 	width: 50%;
+	/*opacity: 0.9;*/
+	margin: 50px;
+	/*filter: alpha(opacity=10);*/ 
+}
+
+.warntext{
+	color: red;
+}
+
+.lucida_font {
+	font-family: "Lucida Console", Monaco, monospace ;
+	text-decoration: underline;
+	color: black;
+	text-align: center;
+}
+
+.lucida_font_test {
+	fontRatio: 4;
+	font-family: "Lucida Console", Monaco, monospace ;
+	text-decoration: underline;
+	color: black;
+	text-align: center;
+	width: 180px;
+	height: 80px;
+	background: lightgray;
+	margin: 0 auto;
+}
+
+.btn-space {
+    margin: 50px;
+}
+
+.bslf{
+  	width: 350px;
+	margin: 120px auto;
+	padding: 25px 20px;
+	background: #292b2d;
+	box-shadow: 2px 2px 4px #ab8de0;
+	border-radius: 5px;
+	color: #fff;
+}
+.bslf h2{
+	margin-top: 0px;
+	margin-bottom: 15px;
+	padding-bottom: 5px;
+	border-radius: 10px;
+	border: 1px solid #25055f;
+}
+.bslf a{color: #783ce2;}
+.bslf a:hover{
+	text-decoration: none;
+	color: #03A9F4;
+}
+.bslf .checkbox-inline{padding-top: 7px;}
+
+
+.button_gray {
+	background-color: silver; 
+	color: black;
+	border-radius: 20px;
+}
+
+.button_gray:hover {
+	background-color: white; 
+	color: black;
+	border-radius: 20px;
+}

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    {% load static %}
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'account/img/core-img/favicon.ico' %}">
+    <link rel="shortcut icon" href="{% static 'navmenu/../favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'navmenu/css/default.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'navmenu/css/component.css' %}" />
+    <script src="{% static 'navmenu/js/modernizr.custom.js' %}"></script>
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="{% static 'account/style.css' %}">
+    <style>
+        .slidecontainer {
+          width: 100%;
+        }
+
+        .slider {
+          -webkit-appearance: none;
+          width: 60%;
+          height: 25px;
+          background: #d3d3d3;
+          outline: none;
+          opacity: 0.7;
+          -webkit-transition: .2s;
+          transition: opacity .2s;
+        }
+
+        .slider:hover {
+          opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 25px;
+          height: 25px;
+          background: #4CAF50;
+          cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+          width: 25px;
+          height: 25px;
+          background: #4CAF50;
+          cursor: pointer;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+
+    <header class="header-area">
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p style="font-size: 20px;" >Welcome to <span>Online Service Provider</span> You are accessing as a <span><i>Customer</i></span></p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a style="font-size: 20px;" href="/account">Home</a>
+                                <a style="font-size: 20px;" href="/account/login">Login | Register</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <section class="currency-calculator-area section-padding-100 bg-img bg-overlay" style="background-image: url(img/bg-img/bg-2.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center white mx-auto">
+                        <h3 class="mb-4" style="font-size: 70px;">Search Results</h3>
+
+                        {% if total == "0" %}
+                        <h5 class="mb-2">Sorry, There are no results for the given input.</h5>
+                        <p>Try again with different options, keywords.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    {% if total != "0" %}
+
+        <section    class="cryptos-video-area section-padding-100-0 bg-img"
+                    style="background-color: white; background-style: cover;">
+            <div class="container">
+                <form method="post" style="font-size: 30px;" novalidate>
+                    {% csrf_token %}
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-6">
+                            <div class="about-content mb-100">
+                                <div class="section-heading">
+                                    <p style="color: orange; font-size: 40px;">Filter</p>
+                                    <p>&nbsp</p>
+                                    <p style="color: black; font-size: 30px;">Area of Interest</p>
+                                    <select name="district" style="width: 80%; height: 40px; font-size: 20px;">
+                                        <option style="font-size: 20px;" value="">None</option>
+                                        <option style="font-size: 20px;" value="Dhaka">Dhaka</option>
+                                        <option style="font-size: 20px;" value="Chittagong">Chittagong</option>
+                                        <option style="font-size: 20px;" value="Rajshahi">Rajshahi</option>
+                                        <option style="font-size: 20px;" value="Barishal">Barishal</option>
+                                        <option style="font-size: 20px;" value="Khulna">Khulna</option>
+                                        <option style="font-size: 20px;" value="Sylhet">Sylhet</option>
+                                        <option style="font-size: 20px;" value="Rangpur">Rangpur</option>
+                                    </select>
+                                    <br>
+                                    <br>
+                                    <p style="color: black; font-size: 30px;">Cost Above: <span id="minval"></span></p>
+                                    <input type="range" min="1" max="50000" value="1" class="slider" id="cost_min" name="cost_min">
+                                    <p style="color: black; font-size: 30px;">Cost Below: <span id="maxval"></span></p>
+                                    <input type="range" min="1" max="50000" value="50000" class="slider" id="cost_max" name="cost_max">
+
+                                    <p style="color: black; font-size: 30px;">Rating Above: <span id="ratemin"></span></p>
+                                    <input type="range" min="1" max="5" value="1" class="slider" id="rating_min" name="rating_min">
+                                    <p style="color: black; font-size: 30px;">Rating Below: <span id="ratemax"></span></p>
+                                    <input type="range" min="1" max="5" value="5" class="slider" id="rating_max" name="rating_max">
+
+                                    <br>
+                                    <p style="color: black; display: inline; font-size: 20px;">Show No Rating </p>
+                                    {{ form.norating }}
+                                    <br> 
+                                    <br> 
+                                    <button type="submit" class="btn cryptos-btn">Apply Filter</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="video-area mb-100">
+                                <h3>Service</h3>
+                                {{ form.service }} 
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+
+        <div class="blog-area section-padding-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div class="cryptos-blog-posts">
+                            <div class="row">
+
+                                <div class="col-12">
+                                    <form method="post" novalidate>
+                                        {% csrf_token %}
+                                        {% for val in sp %}
+
+                                            <!-- Single Blog Area -->
+                                            <div class="single-blog-area d-flex align-items-start">
+                                                <!-- Thumbnail -->
+                                                <div class="blog-thumbnail">
+                                                    <img src="{{ val.provimg }}" style="max-width: 100px; max-height: 100px;" alt="">
+                                                </div>
+                                                <!-- Content -->
+                                                <div class="blog-content">
+                                                    <a href="/account/searchDetail/{{ val.id }}" class="post-title">{{ val.provname }}</a>
+                                                    <div class="meta-data">
+                                                        <a href="#">Cost: {{ val.cost }} BDT</a> |
+                                                        <a href="#">Rating: {{ val.rating }}</a>
+                                                    </div>
+                                                    <p>{{ val.desc }}</p>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </form>
+
+                                        
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>  
+        
+    {% endif %}
+
+    <script>
+        var slider1 = document.getElementById("cost_min");
+        var output1 = document.getElementById("minval");
+        output1.innerHTML = slider1.value;
+
+        slider1.oninput = function() {
+          output1.innerHTML = this.value;
+        }
+        var slider2 = document.getElementById("cost_max");
+        var output2= document.getElementById("maxval");
+        output2.innerHTML = slider2.value;
+
+        slider2.oninput = function() {
+          output2.innerHTML = this.value;
+        }
+
+        var slider3 = document.getElementById("rating_min");
+        var output3 = document.getElementById("ratemin");
+        output3.innerHTML = slider3.value;
+
+        slider3.oninput = function() {
+          output3.innerHTML = this.value;
+        }
+        var slider4 = document.getElementById("rating_max");
+        var output4= document.getElementById("ratemax");
+        output4.innerHTML = slider4.value;
+
+        slider4.oninput = function() {
+          output4.innerHTML = this.value;
+        }
+
+    </script>
+
+    <script src="{% static 'account/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'account/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'account/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'account/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'account/js/active.js' %}"></script>
+</body>
+
+</html>

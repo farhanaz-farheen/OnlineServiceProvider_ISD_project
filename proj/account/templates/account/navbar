@@ -1,0 +1,255 @@
+
+                    <div class="cbp-hsinner">
+                        <ul class="cbp-hsmenu">
+                            <li>
+                                <div class = "test">
+                                    <img src="{% static 'navmenu/images/1.png' %}" alt="img01"/>
+                                </div>
+                                <a href="#">Education</a>
+                                <ul class="cbp-hssubmenu">
+                                    <li><a href="#"><img src="{% static 'navmenu/images/book.png' %}" alt="img01"/><span>Book Borrowing</span></a></li>
+                                    <li><a href="#"><img src="{% static 'navmenu/images/tutor.jpg' %}" alt="img02"/><span>Tutor</span></a></li>
+                                    <!--
+                                    <li><a href="#"><img src="{% static 'navmenu/images/3.png' %}" alt="img03"/><span>Service 2 </span></a></li>
+                                    <li><a href="#"><img src="{% static 'navmenu/images/4.png' %}" alt="img03"/><span>Service 3 </span></a></li>
+                                    <li><a href="#"><img src="{% static 'navmenu/images/5.png' %}" alt="img03"/><span>Service 4 </span></a></li>-->
+                                </ul>
+                            </li>
+                            <li>
+                                <div class = "test">
+                                    <img src="{% static 'navmenu/images/home.png' %}" alt="img01"/>
+                                </div>
+                                <a href="#">Household</a>
+                                <ul class="cbp-hssubmenu">
+                                    <li><a href="#"><img src="{% static 'navmenu/images/indes.png' %}" alt="img01"/><span>Interior Design</span></a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class = "test">
+                                    <img src="{% static 'navmenu/images/3.png' %}" alt="img01"/>
+                                </div>
+                                <a href="#">Event Planning</a>
+                                <ul class="cbp-hssubmenu">
+                                    <li><a href="#"><img src="{% static 'navmenu/images/dance.jpg' %}" alt="img01"/><span>Dance Chorography</span></a></li>
+                                </ul>
+                            </li>
+                     
+                        </ul>
+                    </div>
+
+
+        <div class="container">
+            <div class="main">
+                <nav class="cbp-hsmenu-wrapper" id="cbp-hsmenu-wrapper">
+                    <div class="cbp-hsinner">
+                        <ul class="cbp-hsmenu">
+                            {% for cat in CategoryServices %}
+                                <li>
+                                    <div class = "test">
+                                        <img src="{{ cat.imgurl }}" style="max-width: 100px;" alt="img01"/>
+                                    </div>
+                                    <a href="#">{{ cat.catname }}</a>
+                                    {% for ser in cat.services %}
+                                        <ul class="cbp-hssubmenu">
+                                            <li><a href="#"><img src="{{ ser.imgurl }}" alt="img01"/><span>{{ ser.servname }}</span></a></li>
+                                        </ul>
+                                    {% endfor %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+
+
+    {% if recflag == 1 %}
+
+        <div class="cryptos-feature-area section-padding-100-0">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-heading text-center mx-auto">
+                            <h3>Recommended <br><span> for you</span></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
+
+        {% if ordrectotal != 0 %}
+            <section class="product_list best_seller section_padding">
+                <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="section_tittle text-center">
+                                    <h2>Because You Ordered</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-lg-12">
+                                <div class="best_product_slider owl-carousel">
+                                    {% for or in ordrec %}
+
+                                        <div class="single_product_item">
+                                            <img src="{{ or.url }}" alt="">
+                                            <div class="single_product_text">
+                                                <h4>{{ or.provname }}</h4>
+                                                <h3>{{ or.servname }}</h3>
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </section>
+        {% endif %}
+
+        {% if comrectotal != 0 %}
+            <section class="product_list best_seller section_padding">
+                <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="section_tittle text-center">
+                                    <h2>Because You Searched Frequently</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-lg-12">
+                                <div class="best_product_slider owl-carousel">
+                                    {% for or in comrec %}
+
+                                        <div class="single_product_item">
+                                            <img src="{{ or.url }}" alt="">
+                                            <div class="single_product_text">
+                                                <h4>{{ or.provname }}</h4>
+                                                <h3>{{ or.servname }}</h3>
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </section>
+        {% endif %}
+
+        {% if rangerectotal != 0 %}
+            <section class="product_list best_seller section_padding">
+                <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="section_tittle text-center">
+                                    <h2>Because you searched in a particular cost range</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-lg-12">
+                                <div class="best_product_slider owl-carousel">
+                                    {% for or in rangerec %}
+
+                                        <div class="single_product_item">
+                                            <img src="{{ or.url }}" alt="">
+                                            <div class="single_product_text">
+                                                <h4>{{ or.provname }}</h4>
+                                                <h3>{{ or.servname }}</h3>
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </section>
+        {% endif %}     
+
+        {% if servrectotal != 0 %}
+            <section class="product_list best_seller section_padding">
+                <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="section_tittle text-center">
+                                    <h2>Because you searched for similar services</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-lg-12">
+                                <div class="best_product_slider owl-carousel">
+                                    {% for or in servrec %}
+
+                                        <div class="single_product_item">
+                                            <img src="{{ or.url }}" alt="">
+                                            <div class="single_product_text">
+                                                <h4>{{ or.provname }}</h4>
+                                                <h3>{{ or.servname }}</h3>
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </section>
+        {% endif %}             
+
+        {% if servrectotal != 0 %}
+            <section class="product_list best_seller section_padding">
+                <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="section_tittle text-center">
+                                    <h2>Because you searched for similar services</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-lg-12">
+                                <div class="best_product_slider owl-carousel">
+                                    {% for or in servrec %}
+
+                                        <div class="single_product_item">
+                                            <img src="{{ or.url }}" alt="">
+                                            <div class="single_product_text">
+                                                <h4>{{ or.provname }}</h4>
+                                                <h3>{{ or.servname }}</h3>
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </section>
+        {% endif %}        
+
+    {% endif %}
+
+
+
+
+    {% if val.totalimages != 0 %}
+
+        <div class="w3-content w3-display-container">
+            {% for im in val.images %}
+
+                <img class="mySlides" src="{{ im }}" style="width:100%">
+
+            {% endfor %}
+
+            <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+            <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+        </div>
+
+        <div class="container" style="width: 100%; height: 50px;"></div>
+    {% endif %} 

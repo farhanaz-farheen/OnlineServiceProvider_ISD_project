@@ -1,0 +1,49 @@
+<a class="navbar-brand" href="#">OSP</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+{% if user == "None" %}
+<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+		<li class="nav-item">
+			<a class="nav-link" href="/provider/login">Login</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/provider/register">Signup</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/provider/search">Search</a>
+		</li>	
+		<li class="nav-item">
+			<a class="nav-link" href="/account">Customer</a>
+		</li>	
+    </ul>
+</div>
+
+{% else %}
+<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+		<li class="nav-item">
+			<a class="nav-link" href="/provider/profile">{{ user }}</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/provider/edit">Edit profile</a>
+		</li>
+
+		<li class="nav-item">
+			<a class="nav-link" href="/provider/logout">Logout</a>
+		</li>	
+		<li class="nav-item">
+			<a class="nav-link" href="/provider/editcost">Edit Cost</a>
+		</li>  
+		<li class="nav-item">
+			<a class="nav-link" href="/provider/inbox">Inbox</a>
+		</li>  
+		<li class="nav-item">
+			<a class="nav-link" href="/provider/Processing">Accepted Orders</a>
+		</li>  
+	</ul>
+</div>
+
+{% endif %}

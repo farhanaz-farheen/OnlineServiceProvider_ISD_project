@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    {% load static %}
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'provhome/img/core-img/favicon.ico' %}">
+    <!-- Core Stylesheet -->
+	 <link rel="stylesheet" href="{% static 'provhome/style.css' %}">
+
+</head>
+
+<body>
+    <!-- ##### Preloader ##### -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+    <!-- ##### Header area start ##### -->
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p><font size ="3">Welcome to <span>Online Service Provider.</span> You are accessing as a <span><i><b><font size ="3">Provider</font></b></i></span></font></p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a href="/provider/logout"><font size ="3">Logout</font></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="cryptos-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="cryptosNav">
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="#">{{ user }}</a></li>
+                                </ul>
+
+
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+
+    <div class="cryptos-guide-line section-padding-100 bg-img"
+            style="background-image: url({% static 'provider/back4.jpg' %});">
+        
+        <div class="container">
+
+            <div class="row align-items-center">
+                <div class="col-12 col-md-6">
+                    <div class="guideline-content">
+                        <!-- Single Step -->
+                        <div class="single-step d-flex">
+                            <div class="quantity"></div>
+                            <div class="step-content">
+                                <h6>Welcome</h6>
+                                <p style="font-size: 16px; ">{{ name }}</p>
+                            </div>
+                        </div>
+                        <!-- Single Step -->
+                        <div class="single-step d-flex">
+                            <div class="quantity"></div>
+                            <div class="step-content">
+                                <h6>Setup Account</h6>
+                                <p style="font-size: 16px; " >Upload Profile Picture and Service Details to continue</p>
+                            </div>
+                        </div>
+                        <!-- Single Step -->
+                        <div class="single-step d-flex">
+                            <div class="quantity"></div>
+                            <div class="step-content">
+                                <h6>Basic Information</h6>
+                                <i style=" display: inline;" class="fa fa-envelope-o"></i>
+                            
+                                <p style="font-size: 16px;  display: inline;" >{{ email }}</p>
+                                <br>
+                                <i style=" display: inline;" class="fa fa-phone"></i>
+                            
+                                <p style="font-size: 16px;  display: inline;" >{{ phone }}</p>
+                                <br>
+                                <p style="font-size: 16px;  display: inline;" >{{ desc }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="guideline-content">
+                        <div class="guideline-thumb" style="margin-left: 50px; background-color: white; padding: 20px;">
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <p style="font-size: 24px; color: black;"><b>Please select location</b></p>
+                                    
+                                         <input type="radio" name="location" value="Dhaka" checked>Dhaka<br>
+                                         <input type="radio" name="location" value="Chittagong">Chittagong<br>
+                                         <input type="radio" name="location" value="Rajshahi">Rajshahi<br>
+                                         <input type="radio" name="location" value="Barishal">Barishal<br>
+                                         <input type="radio" name="location" value="Sylhet">Sylhet<br>
+                                         <input type="radio" name="location" value="Khulna">Khulna<br>
+                                         <input type="radio" name="location" value="Rangpur">Rangpur<br>
+                                    <br>
+                                    <p style="font-size: 24px; color: black" ><b>Upload Profile Picture(Optional)</b></p>
+                                    <input type="file" name="dp">
+                                    <p>&nbsp</p>
+                                    <button type="submit" class="btn cryptos-btn">Next</button>
+                                </form>
+                            
+                        </div>                         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+    <!-- ##### Footer Area Start ##### -->
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{% static 'provhome/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'provhome/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'provhome/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'provhome/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'provhome/js/active.js' %}"></script>
+</body>
+
+</html>

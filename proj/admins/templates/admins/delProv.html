@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    {% load static %}
+<!--===============================================================================================-->  
+    <link rel="icon" type="image/png" href="{% static 'login/images/icons/favicon.ico' %}"/>
+    <link rel="icon" href="{% static 'admins/img/core-img/favicon.ico' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->  
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->  
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'admins/style.css' %}">
+    <link rel="stylesheet" href="{% static 'admins/css/select.css' %}">
+<!--===============================================================================================-->
+
+</head>
+
+<body>
+
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+    
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p style="font-size: 20px;" >Welcome to <span>Online Service Provider</span> You are accessing as an admin.</p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a style="font-size: 20px;" href="/admins/logout">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="cryptos-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="cryptosNav">
+
+                        <!-- Logo -->
+                        <a class="nav-brand" href="#"><img src="img/core-img/logo.png" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="/admins/profile">{{ user }}</a></li>
+                                    <li><a href="/admins/Addadmin">Add admins</a></li>
+                                    <li><a href="/admins/Editadmin">Edit Profile</a></li> 
+                                    <li><a href="#">Deleted Users</a>
+                                        <ul class="dropdown">
+                                            <li><a href="/admins/delCust">Customers</a></li>
+                                            <li><a href="/admins/delProv">Providers</a></li>
+                                        </ul>
+                                    </li>                       
+                                </ul>
+
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <center>
+        <div class="w3-container" style="width:70%;">
+                
+                <h3>Deleted Providers</h3>
+              
+
+                <div class = "container" style="width:100%;height:20px;"></div>
+              
+                
+
+                {% for order in orders %}
+                    <table class="w3-table-all">
+                        <tr class="w3-hover-black">
+                          <td style="font-size: 16px;"><b>Name</b></td>
+                          <td style="font-size: 16px;">{{ order.name }}</td>
+                          
+                        </tr>
+                        <tr class="w3-hover-black">
+                          <td style="font-size: 16px;"><b>Email</b></td>
+                          <td style="font-size: 16px;">{{ order.email }}</td>
+                          
+                        </tr>
+                        <tr class="w3-hover-black">
+                          <td style="font-size: 16px;"><b>Phone</b></td>
+                          <td style="font-size: 16px;">+880{{ order.phone }}</td>
+                          
+                        </tr>
+                        <tr class="w3-hover-black">
+                          <td style="font-size: 16px;"><b>Review</b></td>
+                          <td style="font-size: 16px;">{{ order.msg }}</td>
+                          
+                        </tr>
+                    </table>
+                    <p>&nbsp</p>
+                {% endfor %}
+
+        </div>
+    </center>  
+
+    <script src="{% static 'provhome/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'provhome/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'provhome/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'provhome/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'provhome/js/active.js' %}"></script>
+
+</body>
+</html>
+
+

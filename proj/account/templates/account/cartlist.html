@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+crossorigin=""></script>   
+    {% load static %}
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'account/img/core-img/favicon.ico' %}">
+    <link rel="shortcut icon" href="{% static 'navmenu/../favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'navmenu/css/default.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'navmenu/css/component.css' %}" />
+    <script src="{% static 'navmenu/js/modernizr.custom.js' %}"></script>
+    <!-- Core Stylesheet -->
+     <link rel="stylesheet" href="{% static 'account/style.css' %}">
+
+</head>
+
+<body>
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+
+<header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p style="font-size: 20px;">Welcome to <span>Online Service Provider</span> You are accessing as a <i><b><span>customer</span></i></b></p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a style="font-size: 20px;" href="/account/logout">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="cryptos-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="cryptosNav">
+
+                        <!-- Logo -->
+                        <a class="nav-brand" href="#"><img src="{% static 'account/img/core-img/logo.png' %}" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="/account/profile">{{ user }}</a></li>
+                                    <li><a href="/account/Editcustomer">Edit Account</a></li>
+
+                                    <li><a href="#">Orders</a>
+                                        <ul class="dropdown" style="width: 200px;">
+                                            <li><a href="/account/pending_order">Pending Orders | <font color="orange">{{ totalPending }}</font></a></li>
+                                            <li><a href="/account/accepted_order">Accepted Orders | <font color="orange">{{ totalAccepted }}</font></a></li>
+                                            <li><a href="/account/PastOrders">Past Orders | <font color="orange">{{ totalPast }}</font></a></li>
+                                        </ul>
+                                    </li>                            
+                                </ul>
+
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <section class="currency-calculator-area section-padding-100 bg-img bg-overlay" style="background-image: url(img/bg-img/bg-2.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center white mx-auto">
+                        <h3 class="mb-4">Complete Cart</h3>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+	    <form method="post" novalidate>
+	        {% csrf_token %}
+			{% for val in value %}
+				
+					<div class="container"
+						style=" width: 70%;
+								background-color: white;
+								margin-left: 100px;
+								margin-bottom: 50px;
+								margin-top: 50px;
+								border-radius: 20px;
+								white-space:nowrap">
+
+						<div class="container" style="width: 50%; white-space:nowrap; display: inline-block;">						
+							<img src="{{ val.provimg }}" 
+								style=" margin-top: 20px;
+										margin-left: 50px;
+										margin-bottom: 20px; 
+										display: inline; 
+										max-width: 150px; 
+										max-height: 150px;">
+							
+							<h1 style="margin-left: 50px; display: inline; font-size: 30px; color: black;">
+									{{ val.provname }}
+							</h1>
+
+						
+							<p style="margin-left: 120px; font-size: 20px; color: black;">
+								Cost: {{ val.cost }} BDT.
+							</p>
+							<p style="margin-left: 120px; font-size: 20px; color: black;">
+								Service: {{ val.service }}
+							</p>
+							<p style="margin-left: 120px; font-size: 20px; color: black;">
+								{{ val.desc }}
+							</p>
+						</div>
+
+						<div class="container" 
+							style=" font-size: 18px;
+							 		width: 50%;
+							 		white-space:nowrap;
+							 		display: inline-block;
+							 		margin-top: 50px;
+							 		margin-bottom: 50px;
+							 		">
+		
+						<input type="number" name="cost_{{ forloop.counter }}" placeholder="Cost">
+						<p></p>
+						<p></p>
+						<label>Expected Date of Delivery</label>
+						<input type="date" name="expDate_{{ forloop.counter }}">
+						<p></p>
+						<label>Expected Time of Delivery</label>
+						<input type="time" name="expTime_{{ forloop.counter }}">
+						<p></p>
+						<label>Comments</label>
+						<input type="text" name="desc_{{ forloop.counter }}">
+						</div>
+						<p>&nbsp</p>
+						<p></p>
+
+						<div class="container" style="font-size: 18px; width: 80%; margin-bottom: 20px; margin-top: 10px; margin-left: 80px;">
+						<textarea cols="80" rows="3" name="deliveryAddress_{{ forloop.counter }}" placeholder="Delivery Address"></textarea>
+						<p>Drag the marker to change location.</p>
+						<div id="map{{ forloop.counter }}" style="width:700px; height: 500px;"></div>
+						</div>
+
+					</div>
+
+
+													
+			{% endfor %}
+			<p>&nbsp</p>
+			<p>&nbsp</p>
+			<p>&nbsp</p>	
+			<center>
+			<button name="getbtn" id="clkbtn" value="ll" type="submit" onclick="allLocation();" class="btn cryptos-btn btn-space" >Checkout</button>
+			</center>
+			<p>&nbsp</p>
+			<p>&nbsp</p>
+			<p>&nbsp</p>	
+		</form>	
+	
+
+	<script>
+		var map;
+		var marker;
+		var tot = {{ total }};
+		
+
+	    map = [];
+	    marker= [];
+
+	    for (var i = 1; i <= tot; i++) {
+
+			var mapid = 'map'+i;	    	
+	        map.push(L.map(mapid).setView([23.809190613633735, 90.42934795703127], 13));
+	        marker.push(L.marker([23.809190613633735, 90.42934795703127],{draggable:true}).addTo(map[i-1]));
+	        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+	            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+	            maxZoom: 18,
+	            id: 'mapbox.streets',
+	            accessToken: 'pk.eyJ1Ijoic2lwMTYiLCJhIjoiY2p5OGQ5NnI1MDh3ZTNvdDF1d2xjMXJiZiJ9.PzHdvFM8jq5YI09xsShShA'
+	        }).addTo(map[i-1]);		        
+		    /*
+		    map[i-1].onclick = function() {
+
+		        marker[i-1].setLatLng(this.latlng);
+
+		    }	*/        
+
+		}
+		
+		function allLocation(){
+
+		    for (var i = 0; i < marker.length; i++) {
+
+		        var currentLocation = marker[i].getLatLng();
+		        console.log(typeof currentLocation);
+		        console.log(currentLocation.lat,currentLocation.lng);
+		        console.log(typeof currentLocation.lat,typeof currentLocation.lng);
+		        var lat = currentLocation.lat.toString();
+		        var lon = currentLocation.lng.toString();
+		        document.getElementById('clkbtn').value = document.getElementById('clkbtn').value+"_"+lat+":"+lon;
+		    }
+		}
+	
+	</script>
+	
+	<script src="{% static 'account/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'account/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'account/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'account/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'account/js/active.js' %}"></script>
+</body>
+
+</html>

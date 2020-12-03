@@ -1,0 +1,172 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+{% load static %}
+
+<!--===============================================================================================-->  
+    <link rel="icon" type="image/png" href="{% static 'login/images/icons/favicon.ico' %}"/>
+    <link rel="icon" href="{% static 'account/img/core-img/favicon.ico' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->  
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->  
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'provhome/style.css' %}">
+<!--===============================================================================================-->
+
+</head>
+
+<body>
+    <!-- ##### Preloader ##### -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+    <!-- ##### Header area start ##### -->
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                            <!-- Top Headline -->
+                            <div class="top-headline">
+                                <p><font size ="3">Welcome to <span>Online Service Provider.</span> You are accessing as a <span><i><b><font size ="3">Provider</font></b></i></span></font></p>
+                            </div>
+                            <!-- Top Login & Faq & Earn Monery btn -->
+                            <div class="login-faq-earn-money">
+                                <a href="/provider/"><font size ="3">Home</font></a>
+                                <a href="/provider/login"><font size ="3">Login</font></a>
+                                <a href="/provider/register"><font size ="3">Signup</font></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="blog-area section-padding-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="container form1">
+                        <center>
+                            <div class="container">
+                                <div class="blog-section-heading mb-50">
+                                    <h3>Registration Summary</h3>
+                                </div>
+
+                                <p style="font-size: 18px; color: black; font-weight: bold; display: inline;">First Name:</p>
+                                <p style="font-size: 18px; color: black; display: inline;">{{ fname }}</p>
+                                <br>
+                                <p style="font-size: 18px; color: black; font-weight: bold; display: inline;">Last Name:</p>
+                                <p style="font-size: 18px; color: black; display: inline;">{{ lname }}</p>
+                                <br>
+                                <p style="font-size: 18px; color: black; font-weight: bold; display: inline;">Email:</p>
+                                <p style="font-size: 18px; color: black; display: inline;">{{ email }}</p>
+                                <br>
+                                <p style="font-size: 18px; color: black; font-weight: bold; display: inline;">Phone:</p>
+                                <p style="font-size: 18px; color: black; display: inline;">+880{{ phone }}</p>
+                                <br>
+                                <p style="font-size: 18px; color: black; font-weight: bold; display: inline;">Description:</p>
+                                <p style="font-size: 18px; color: black; display: inline;">{{ desc }}</p>
+                                <br>
+                                <p style="font-size: 18px; color: black; font-weight: bold;">Identification:</p>
+                                <img src="{{ idimg }}" style="max-width: 300px; border-style: solid;">
+                            </div>
+                        </center>
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <div class="cryptos-blog-sidebar-area">
+
+                        <!-- Section Heading -->
+                        <div class="blog-section-heading mb-50">
+                            <h3>Services</h3>
+                        </div>
+
+                        <!-- Single Blog Area -->
+                        <div class="single-blog-area blog-style-3 d-flex align-items-center mb-15">
+                            <form method="post" enctype="multipart/form-data" novalidate>
+                                {% csrf_token %}
+                                {% for ser in services_images %}
+                                    <p style="color: black; font-size: 20px;">{{ ser.servname }}</p>
+                                    <img src="{{ ser.imgurl }}" style="max-width: 300px;">
+                                    <div class = "container" style="width: 100%;height: 50px"></div>
+                                    <button type="submit" name="btn" class="btn cryptos-btn btn-space" value="{{ ser.id }}">Delete</button>
+                                    <div class = "container" style="width: 100%;height: 50px"></div>
+                                {% endfor %}
+                            </form>
+                        </div>
+
+
+                    	<a class="btn cryptos-btn btn-space" href="/provider/registerMsg">Done</a>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+<!--===============================================================================================-->
+    <script src="{% static 'login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'login/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'login/vendor/bootstrap/js/popper.js' %}"></script>
+    <script src="{% static 'login/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'login/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'login/vendor/daterangepicker/moment.min.js' %}"></script>
+    <script src="{% static 'login/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'login/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'login/js/main.js' %}"></script>
+    
+<!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{% static 'provhome/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'provhome/js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'provhome/js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'provhome/js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'provhome/js/active.js' %}"></script>    
+
+</body>
+
+</html>
+
